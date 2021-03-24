@@ -13,7 +13,6 @@ import java.nio.file.Files.size
 
 class RecyclerAdapter(
     private val recyclerList: List<RecyclerViewItem>,
-    private val listener: OnItemClickListener
     ) :
     RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>(){
 
@@ -34,7 +33,6 @@ class RecyclerAdapter(
     }
 
 
-
     override fun getItemCount() = recyclerList.size
 
     inner class RecyclerViewHolder(itemView: View): RecyclerView.ViewHolder(itemView),
@@ -43,21 +41,7 @@ class RecyclerAdapter(
         val imageView: ImageView = itemView.image_view
         val textView1: TextView = itemView.text_view_1
         val textView2: TextView = itemView.text_view_2
-        val deleteButton: ImageButton = itemView.delete_btn
 
-        init{
-            deleteButton.setOnClickListener(this)
-        }
-
-        override fun onClick(v: View?) {
-            val position = adapterPosition
-            if (position != RecyclerView.NO_POSITION) {
-                listener.onItemClick(position)
-            }
-        }
     }
 
-    interface OnItemClickListener {
-        fun onItemClick(position: Int)
-    }
 }

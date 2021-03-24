@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Inventory</string>
+    <string name="action_settings">Login</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="main_page_title">My Inventory</string>
+    <string name="second_page_title">Add some todos</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="main_page">Test main page</string>
+    <string name="second_page">Test second page</string>
 </resources>

@@ -9,17 +9,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ikt205.inventory.databinding.FragmentHomePageBinding
 import kotlinx.android.synthetic.main.fragment_home_page.*
-import kotlin.random.Random
 
 /**
- * A simple fragment subclass as the main(default) destination in the navigation.
  * TODO: Change name of the activities to something more suitable
  * TODO: Add some commenting
  */
-class HomePage : Fragment(), RecyclerAdapter.OnItemClickListener {
+class HomePage : Fragment() {
 
     private val testList = generateDummyList(10)
-    private val adapter = RecyclerAdapter(testList, this)
+    private val adapter = RecyclerAdapter(testList)
     private var _binding: FragmentHomePageBinding? = null
     private val binding get() = _binding!!
 
@@ -32,8 +30,8 @@ class HomePage : Fragment(), RecyclerAdapter.OnItemClickListener {
     }
 
     // Generating a dummy list for testing purposes
-    private fun generateDummyList(size: Int): ArrayList<RecyclerViewItem> {
-        val list = ArrayList<RecyclerViewItem>()
+    private fun generateDummyList(size: Int): List<RecyclerViewItem> {
+        val list = List<RecyclerViewItem>()
         for (i in 0 until size) {
             val drawable = when (i % 3) {
                 0 -> R.drawable.ic_baseline_6_ft
@@ -46,13 +44,6 @@ class HomePage : Fragment(), RecyclerAdapter.OnItemClickListener {
         return list
     }
 
-    override fun onItemClick(position: Int) {
-        val index = position
-
-        testList.removeAt(index)
-        adapter.notifyItemRemoved(index)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recycler_view.adapter = adapter
@@ -60,8 +51,11 @@ class HomePage : Fragment(), RecyclerAdapter.OnItemClickListener {
         recycler_view.layoutManager = LinearLayoutManager(this.context)
         recycler_view.setHasFixedSize(true)
 
-    }
 
+        binding.addNewList.setOnClickListener {
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
