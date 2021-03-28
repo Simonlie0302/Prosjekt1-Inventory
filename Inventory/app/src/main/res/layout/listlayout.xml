@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".MainActivity"
+    android:padding="4dp"
+    android:layout_margin="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+        android:background="@color/teal_200"
+        android:orientation="horizontal"
+        android:outlineAmbientShadowColor="@color/black"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvTittel"
+            android:layout_width="269dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="29dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/pbProgress"
+            style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
+            android:layout_width="145dp"
+            android:layout_height="34dp"
+            android:indeterminate="false"
+            android:indeterminateTint="@color/orange"
+            android:progressBackgroundTint="@color/black" />
+
+        <ImageButton
+            android:id="@+id/deleteBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="-7dp"
+            android:background="@color/teal_200"
+            android:src="@drawable/ic_baseline_delete_24" />
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
