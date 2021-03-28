@@ -1,61 +1,59 @@
 package com.ikt205.inventory
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.recycled_item.view.*
+import com.ikt205.inventory.data.ListDepositoryManager
+import com.ikt205.inventory.data.Todo
+import com.ikt205.inventory.databinding.ListlayoutBinding
 
-class RecyclerAdapter(
-    private val recyclerList: List<RecyclerViewItem>,
-    private val listener: OnItemClickListener
-) :
-    RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>(){
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recycled_item,
-            parent, false)
-
-        return RecyclerViewHolder(itemView)
-    }
-
-    override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
-        val currentItem = recyclerList[position]
-
-        // Retrieves from the view we already chached from the viewHolder because the function gets called over and over again.
-        holder.imageView.setImageResource(currentItem.imageResource)
-        holder.textView1.text = currentItem.text1
-        holder.textView2.text = currentItem.text2
-    }
+private val TAG:String = "Inventory:MainActivity"
 
 
 
-    override fun getItemCount() = recyclerList.size
+class ListRecyclerAdapter(private var todo: List<Todo>,
+                          private val onListClicked:(todo: Todo)-> Unit)
+    : RecyclerView.Adapter<ListRecyclerAdapter.Viewholder>() {
 
-    inner class RecyclerViewHolder(itemView: View): RecyclerView.ViewHolder(itemView),
-        View.OnClickListener{
-        // Using this syntethic property instead of (R.id.image_view)
-        val imageView: ImageView = itemView.image_view
-        val textView1: TextView = itemView.text_view_1
-        val textView2: TextView = itemView.text_view_2
-        val deleteButton: ImageButton = itemView.delete_btn
 
-        init{
-            deleteButton.setOnClickListener(this)
+    inner class Viewholder(val binding: ListlayoutBinding):RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(todo: Todo) {
+            var position: Int = getAdapterPosition()
+
+            binding.tvTittel.text = todo.title
+            binding.pbProgress.max = todo.getSize()
+            binding.pbProgress.setProgress(todo.getCompleted(), true)
+            binding.pbProgress.max = todo.getSize()
+            binding.deleteBtn.setOnClickListener {deleteItem(position)}
         }
+    }
+    override fun getItemCount(): Int = todo.size
 
-        override fun onClick(v: View?) {
-            val position = adapterPosition
-            if (position != RecyclerView.NO_POSITION) {
-                listener.onItemClick(position)
-            }
+    override fun onBindViewHolder(holder: Viewholder, position: Int) {
+        holder.bind(todo[position])
+        holder.itemView.setOnClickListener {
+            onListClicked(
+                todo[position]
+            )
         }
     }
 
-    interface OnItemClickListener {
-        fun onItemClick(position: Int)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Viewholder {
+        return Viewholder(ListlayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+    }
+
+
+    fun updateCollection(newList: List<Todo>){
+        todo = newList as MutableList<Todo>
+        notifyDataSetChanged()
+    }
+
+    fun deleteItem(position:Int){
+        lateinit var dialog:AlertDialog
+        ListDepositoryManager.instance.deleteTodo(position)
+        updateCollection(todo)
     }
 }
