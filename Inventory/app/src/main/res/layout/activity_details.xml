@@ -6,35 +6,63 @@
     android:layout_height="match_parent"
     tools:context=".DetailsActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <include
-            layout="@layout/action_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/detailsCardListing"
+            <include
+                layout="@layout/action_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="20dp"
-                tools:listitem="@layout/detailslayout">
-            </androidx.recyclerview.widget.RecyclerView>
-        </ScrollView>
+                android:fillViewport="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-    </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/detailsCardListing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp"
+                    tools:listitem="@layout/detailslayout" />
+            </ScrollView>
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/pbProgressTest"
+            style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
+            android:layout_width="250dp"
+            android:layout_height="34dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="65dp"
+            android:indeterminate="false"
+            android:indeterminateTint="@color/white"
+            android:progressBackgroundTint="@color/white"
+            android:scaleY="5"
+            android:theme="@style/progressBarTeal" />
+
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/refreshProgress"
+        android:layout_width="40dp"
+        android:background="@color/orange"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_baseline_refresh_24"
+        android:layout_marginTop="62dp"
+        android:layout_marginStart="40dp"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddItem"

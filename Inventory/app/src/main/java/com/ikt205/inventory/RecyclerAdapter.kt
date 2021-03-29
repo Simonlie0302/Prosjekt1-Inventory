@@ -8,28 +8,25 @@ import com.ikt205.inventory.data.ListDepositoryManager
 import com.ikt205.inventory.data.Todo
 import com.ikt205.inventory.databinding.ListlayoutBinding
 
+private val TAG: String = "Inventory:MainActivity"
 
-private val TAG:String = "Inventory:MainActivity"
+class ListRecyclerAdapter(
+    private var todo: List<Todo>,
+    private val onListClicked: (todo: Todo) -> Unit
+) : RecyclerView.Adapter<ListRecyclerAdapter.Viewholder>() {
 
-
-
-class ListRecyclerAdapter(private var todo: List<Todo>,
-                          private val onListClicked:(todo: Todo)-> Unit)
-    : RecyclerView.Adapter<ListRecyclerAdapter.Viewholder>() {
-
-
-    inner class Viewholder(val binding: ListlayoutBinding):RecyclerView.ViewHolder(binding.root) {
-
+    inner class Viewholder(val binding: ListlayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(todo: Todo) {
-            var position: Int = getAdapterPosition()
+            val position: Int = getAdapterPosition()
 
             binding.tvTittel.text = todo.title
             binding.pbProgress.max = todo.getSize()
             binding.pbProgress.setProgress(todo.getCompleted(), true)
             binding.pbProgress.max = todo.getSize()
-            binding.deleteBtn.setOnClickListener {deleteItem(position)}
+            binding.deleteBtn.setOnClickListener { deleteItem(position) }
         }
     }
+
     override fun getItemCount(): Int = todo.size
 
     override fun onBindViewHolder(holder: Viewholder, position: Int) {
@@ -42,17 +39,22 @@ class ListRecyclerAdapter(private var todo: List<Todo>,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Viewholder {
-        return Viewholder(ListlayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return Viewholder(
+            ListlayoutBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
-
-    fun updateCollection(newList: List<Todo>){
+    fun updateCollection(newList: List<Todo>) {
         todo = newList as MutableList<Todo>
         notifyDataSetChanged()
     }
 
-    fun deleteItem(position:Int){
-        lateinit var dialog:AlertDialog
+    fun deleteItem(position: Int) {
+        lateinit var dialog: AlertDialog
         ListDepositoryManager.instance.deleteTodo(position)
         updateCollection(todo)
     }

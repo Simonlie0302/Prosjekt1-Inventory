@@ -27,12 +27,14 @@
 
         <ProgressBar
             android:id="@+id/pbProgress"
-            style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
+            style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
             android:layout_width="145dp"
             android:layout_height="34dp"
             android:indeterminate="false"
             android:indeterminateTint="@color/orange"
-            android:progressBackgroundTint="@color/black" />
+            android:progressBackgroundTint="@color/white"
+            android:scaleY="3"
+            android:theme="@style/progressBarOrange" />
 
         <ImageButton
             android:id="@+id/deleteBtn"
