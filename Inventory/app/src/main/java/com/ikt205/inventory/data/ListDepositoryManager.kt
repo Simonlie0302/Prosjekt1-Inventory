@@ -2,6 +2,7 @@ package com.ikt205.inventory.data
 
 import android.content.Context
 import com.ikt205.inventory.DetailRecyclerAdapter
+import com.ikt205.inventory.DetailsActivity
 
 class ListDepositoryManager {
 
@@ -54,7 +55,6 @@ class ListDepositoryManager {
                 ),
             )
         )
-
         onList?.invoke(listCollection)
     }
 
@@ -75,8 +75,8 @@ class ListDepositoryManager {
 
     fun addItem(todo: Todo, itemList: Todo.Item) {
         val currentItemIndex = listCollection.indexOf(todo)
-        DetailRecyclerAdapter(todo.itemList).updateCollection(listCollection[currentItemIndex].itemList)
         listCollection[currentItemIndex].itemList.add(itemList)
+        DetailRecyclerAdapter(todo.itemList).updateCollection(listCollection[currentItemIndex].itemList)
         onList?.invoke(listCollection)
     }
 

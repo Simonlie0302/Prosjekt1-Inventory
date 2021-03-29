@@ -6,26 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".DetailsActivity">
 
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/detailsCardListing"
+        <include
+            layout="@layout/action_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/detailslayout"
-            android:padding="10dp">
+            android:layout_height="wrap_content" />
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        </androidx.recyclerview.widget.RecyclerView>
-    </ScrollView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/detailsCardListing"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                tools:listitem="@layout/detailslayout">
+            </androidx.recyclerview.widget.RecyclerView>
+        </ScrollView>
+
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddItem"
@@ -34,8 +43,7 @@
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
         android:contentDescription="@string/fab_content_desc"
-        app:srcCompat="@android:drawable/ic_menu_add"
-        />
+        app:srcCompat="@android:drawable/ic_menu_add" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabGoBack"
@@ -44,7 +52,6 @@
         android:layout_gravity="bottom|left"
         android:layout_margin="16dp"
         android:contentDescription="@string/fab_content_desc"
-        android:src="@drawable/ic_arrow"
-        />
+        android:src="@drawable/ic_arrow" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

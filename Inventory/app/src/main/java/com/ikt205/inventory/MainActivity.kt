@@ -1,5 +1,6 @@
 package com.ikt205.inventory
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Build
@@ -34,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -42,6 +44,17 @@ class MainActivity : AppCompatActivity() {
         binding.cardListing.layoutManager = LinearLayoutManager(this)
         binding.cardListing.adapter = ListRecyclerAdapter(emptyList<Todo>(), this::onListClicked)
 
+
+        // set toolbar as support action bar
+        setSupportActionBar(toolbar)
+
+        // show center aligned title and sub title
+        supportActionBar?.apply {
+            toolbarTitle.text = "Inventory"
+            toolbarSubTitle.text = "Never forget anything again"
+            title = ""
+            this.elevation = 15F
+        }
 
         ListDepositoryManager.instance.onList = {
             (binding.cardListing.adapter as ListRecyclerAdapter).updateCollection(it)
