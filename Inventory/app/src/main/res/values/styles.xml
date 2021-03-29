@@ -5,7 +5,7 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/teal_200</item>
-        <item name="colorPrimaryDark">@color/design_default_color_primary_dark</item>
+        <item name="colorPrimaryDark">@color/orange</item>
         <item name="colorAccent">@color/black</item>
     </style>
 
@@ -13,5 +13,14 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="progressBarOrange" parent="@style/Theme.AppCompat">
+        <item name="colorAccent">@color/orange</item>
+    </style>
+
+    <style name="progressBarTeal" parent="@style/Theme.AppCompat">
+        <item name="colorAccent">@color/teal_200</item>
+    </style>
+
 
 </resources>

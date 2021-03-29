@@ -17,8 +17,8 @@ class ListDepositoryManager {
 
     fun load(url: String, context: Context) {
 
-        if (!this::listCollection.isInitialized){
-        listCollection = mutableListOf()
+        if (!this::listCollection.isInitialized) {
+            listCollection = mutableListOf()
         }
 //        if (!this::itemList.isInitialized){
 //            itemList = mutableListOf()
@@ -52,6 +52,36 @@ class ListDepositoryManager {
                     Todo.Item("Ikt205 prosjekt", true),
                     Todo.Item("Data kommunikasjon", false),
                     Todo.Item("Statistikk", false)
+                )
+            ),
+            Todo(
+                "Must watch Movies", mutableListOf(
+                    Todo.Item("Interstellar", true),
+                    Todo.Item("Joker", false),
+                    Todo.Item("The boys", true)
+                )
+            ),
+            Todo(
+                "School work",
+                mutableListOf(
+                    Todo.Item("Ikt205 prosjekt", true),
+                    Todo.Item("Data kommunikasjon", false),
+                    Todo.Item("Statistikk", false)
+                )
+            ),
+            Todo(
+                "Must watch Movies", mutableListOf(
+                    Todo.Item("Interstellar", true),
+                    Todo.Item("Joker", false),
+                    Todo.Item("The boys", true)
+                )
+            ),
+            Todo(
+                "School work",
+                mutableListOf(
+                    Todo.Item("Ikt205 prosjekt", true),
+                    Todo.Item("Data kommunikasjon", false),
+                    Todo.Item("Statistikk", false)
                 ),
             )
         )
@@ -69,7 +99,7 @@ class ListDepositoryManager {
         onList?.invoke(listCollection)
     }
 
-    fun reloadProgressBar(){
+    fun reloadProgressBar() {
         onList?.invoke(listCollection)
     }
 

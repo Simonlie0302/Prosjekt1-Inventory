@@ -5,54 +5,57 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
+import com.ikt205.inventory.data.ListDepositoryManager
 import com.ikt205.inventory.data.Todo
 import com.ikt205.inventory.databinding.DetailslayoutBinding
 
-class DetailRecyclerAdapter(private var item: MutableList<Todo.Item>):RecyclerView.Adapter<DetailRecyclerAdapter.Viewholder>() {
+class DetailRecyclerAdapter(private var itemList: MutableList<Todo.Item>) :
+    RecyclerView.Adapter<DetailRecyclerAdapter.Viewholder>() {
 
-
-    inner class Viewholder(val binding: DetailslayoutBinding): RecyclerView.ViewHolder(binding.root) {
-
+    inner class Viewholder(val binding: DetailslayoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Todo.Item) {
-            var position: Int = getAdapterPosition()
+            val position: Int = getAdapterPosition()
 
             binding.detailsItemNameTv.text = item.itemName
             binding.itemCheckbox.isChecked = item.completed
             binding.itemCheckbox.setOnCheckedChangeListener { compoundButton: CompoundButton, b: Boolean ->
-                item.flipStatus()
-                }
-            binding.itemDelete.setOnClickListener{deleteItem(position)}
+                flip(position)
+            }
+            binding.itemDelete.setOnClickListener { deleteItem(position) }
         }
     }
 
-    override fun getItemCount(): Int = item.size
+    override fun getItemCount(): Int = itemList.size
 
     override fun onBindViewHolder(holder: Viewholder, position: Int) {
-        holder.bind(item[position])
+        holder.bind(itemList[position])
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Viewholder {
-        return Viewholder(DetailslayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return Viewholder(
+            DetailslayoutBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
-    fun updateCollection(newList: MutableList<Todo.Item>){
-        item = newList
+    fun updateCollection(newList: MutableList<Todo.Item>) {
+        itemList = newList
         notifyDataSetChanged()
     }
 
-    fun deleteItem(position:Int) {
+    fun deleteItem(position: Int) {
         lateinit var dialog: AlertDialog
-        item.removeAt(position)
-        //ListDepositoryManager.instance.deleteItem(position)
-        updateCollection(item)
+        itemList.removeAt(position)
+        updateCollection(itemList)
     }
 
     fun flip(position: Int) {
-        item[position].flipStatus()
-        updateCollection(item)
+        itemList[position].flipStatus()
     }
-
-
 }
 

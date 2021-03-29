@@ -1,16 +1,18 @@
 package com.ikt205.inventory.data
 
+import com.ikt205.inventory.DetailRecyclerAdapter
+import com.ikt205.inventory.DetailsActivity
 import java.io.Serializable
 
 data class Todo(
     var title: String,
     val itemList: MutableList<Item>
-) : Serializable{
+) : Serializable {
 
-    data class Item(var itemName:String, var completed:Boolean){
+    data class Item(var itemName: String, var completed: Boolean) {
 
-        fun flipStatus(){
-            completed=!completed
+        fun flipStatus() {
+            completed = !completed
         }
     }
 
@@ -22,19 +24,14 @@ data class Todo(
     }
 
     fun getCompleted(): Int {
-        var n:Int = 0
-        for (i in itemList)
-        {
+        var n: Int = 0
+        for (i in itemList) {
             print(i.completed)
-            if(i.completed == true)
-                n+=1
+            if (i.completed == true)
+                n += 1
         }
         print("\nCOMPLETED : \n")
         print(n)
         return n
-
     }
-
-
-
 }

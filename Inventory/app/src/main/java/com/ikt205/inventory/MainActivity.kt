@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.view.isVisible
 import androidx.core.widget.TextViewCompat
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +21,7 @@ import com.ikt205.inventory.data.ListDepositoryManager
 import com.ikt205.inventory.data.Todo
 import com.ikt205.inventory.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.action_bar.*
-import kotlinx.android.synthetic.main.listlayout.view.*
+import kotlinx.android.synthetic.main.listlayout.*
 
 private val TAG: String = "Inventory:MainActivity"
 
