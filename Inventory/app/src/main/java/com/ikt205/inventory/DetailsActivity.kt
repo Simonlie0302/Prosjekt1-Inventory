@@ -11,6 +11,7 @@ import com.ikt205.inventory.data.ListDepositoryManager
 import com.ikt205.inventory.data.Todo
 import com.ikt205.inventory.databinding.ActivityDetailsBinding
 import com.ikt205.inventory.databinding.ActivityMainBinding
+import kotlinx.android.synthetic.main.action_bar.*
 
 private val TAG:String = "Inventory:MainActivity"
 
@@ -23,7 +24,6 @@ class DetailsActivity() : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         todo = ListHolder.PickedTodo!!
         binding.detailsCardListing.layoutManager = LinearLayoutManager(this)
@@ -42,7 +42,15 @@ class DetailsActivity() : AppCompatActivity() {
 //        }
 //        title=todo.title.toString()
 
-        title=todo.title.toString()
+        setSupportActionBar(toolbar)
+
+        // show center aligned title and sub title
+        supportActionBar?.apply {
+            toolbarTitle.text = todo.title.toString()
+            toolbarSubTitle.text = "Inventory"
+            title = ""
+            this.elevation = 15F
+        }
 
         binding.fabAddItem.setOnClickListener {
             val builder = AlertDialog.Builder(this)
