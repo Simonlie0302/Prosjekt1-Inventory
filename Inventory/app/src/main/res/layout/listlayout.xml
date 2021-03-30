@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:padding="4dp"
+    style="@style/cardBackground"
     tools:context=".MainActivity">
 
     <RelativeLayout

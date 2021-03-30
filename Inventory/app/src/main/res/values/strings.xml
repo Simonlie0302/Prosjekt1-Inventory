@@ -14,4 +14,7 @@
 
     <string name="main_page">Test main page</string>
     <string name="second_page">Test second page</string>
+    <string name="choose_theme_text">Choose theme</string>
+    <string name="txt_title">Hello Android Theme!</string>
+    <string name="change_theme_txt">Change theme</string>
 </resources>
