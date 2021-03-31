@@ -2,9 +2,9 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/mainBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/mainBackground"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                tools:listitem="@layout/listlayout"/>
+                tools:listitem="@layout/listlayout" />
         </ScrollView>
 
     </LinearLayout>
@@ -35,13 +35,13 @@
         android:id="@+id/txt_info_theme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:textSize="18sp" />
 
     <ImageButton
         android:id="@+id/btn_change_theme"
-        android:layout_width="40dp"
         style="@style/btnBackground"
+        android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/ic_baseline_nights_stay_24" />
 

@@ -26,8 +26,16 @@
         <item name="android:background">@color/white</item>
     </style>
 
+    <style name="cardBackgroundMain" parent="@style/ThemeOverlay.AppCompat.Dark">
+        <item name="android:background">@color/teal_200</item>
+    </style>
+
     <style name="cardBackground" parent="@style/ThemeOverlay.AppCompat.Dark">
         <item name="cardBackgroundColor">@color/white</item>
+    </style>
+
+    <style name="cardBackgroundDetail" parent="@style/ThemeOverlay.AppCompat.Dark">
+        <item name="cardBackgroundColor">@color/teal_200</item>
     </style>
 
     <style name="progressBarBackground" parent="@style/ThemeOverlay.AppCompat.Dark">

@@ -1,25 +1,18 @@
 package com.ikt205.inventory
 
-import android.app.ActionBar
-import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.style.UpdateLayout
 import android.util.Log
 import android.widget.EditText
-import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.ikt205.inventory.adapter.DetailRecyclerAdapter
 import com.ikt205.inventory.data.ListDepositoryManager
 import com.ikt205.inventory.data.Todo
 import com.ikt205.inventory.databinding.ActivityDetailsBinding
-import com.ikt205.inventory.databinding.ActivityMainBinding
 import com.ikt205.inventory.databinding.DetailslayoutBinding
-import com.ikt205.inventory.databinding.ListlayoutBinding
 import kotlinx.android.synthetic.main.action_bar.*
-import kotlinx.android.synthetic.main.listlayout.view.*
 
 
 private val TAG: String = "Inventory:MainActivity"
@@ -28,7 +21,6 @@ class DetailsActivity() : AppCompatActivity() {
     private lateinit var binding: ActivityDetailsBinding
     private lateinit var bindingTest: DetailslayoutBinding
     private lateinit var todo: Todo
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,11 +31,9 @@ class DetailsActivity() : AppCompatActivity() {
         binding.detailsCardListing.layoutManager = LinearLayoutManager(this)
         binding.detailsCardListing.adapter = DetailRecyclerAdapter(todo.itemList)
 
-
         if (!this::bindingTest.isInitialized) {
             bindingTest = DetailslayoutBinding.inflate(layoutInflater)
         }
-
 
 //        if(ListHolder.PickedTodo != null){
 //            todo = ListHolder.PickedTodo
@@ -57,7 +47,6 @@ class DetailsActivity() : AppCompatActivity() {
 //            finish()
 //        }
 //        title=todo.title.toString()
-
 
         setSupportActionBar(toolbar)
         updateProgress()

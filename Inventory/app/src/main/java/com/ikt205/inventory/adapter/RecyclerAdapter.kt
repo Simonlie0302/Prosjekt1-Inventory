@@ -1,4 +1,4 @@
-package com.ikt205.inventory
+package com.ikt205.inventory.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,8 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ikt205.inventory.data.ListDepositoryManager
 import com.ikt205.inventory.data.Todo
 import com.ikt205.inventory.databinding.ListlayoutBinding
-
-private val TAG: String = "Inventory:MainActivity"
 
 class ListRecyclerAdapter(
     private var todo: List<Todo>,

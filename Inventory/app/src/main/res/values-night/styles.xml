@@ -31,8 +31,16 @@
     </style>
 
 
+    <style name="cardBackgroundMain" parent="@style/ThemeOverlay.AppCompat.Dark">
+        <item name="android:background">@color/teal_700</item>
+    </style>
+
+    <style name="cardBackgroundDetail" parent="@style/ThemeOverlay.AppCompat.Dark">
+        <item name="cardBackgroundColor">@color/teal_700</item>
+    </style>
+
     <style name="cardBackground" parent="@style/ThemeOverlay.AppCompat.Dark">
-        <item name="cardBackgroundColor">#656565</item>
+        <item name="cardBackgroundColor">#707070</item>
     </style>
 
     <style name="btnBackground" parent="@style/ThemeOverlay.AppCompat.Dark">

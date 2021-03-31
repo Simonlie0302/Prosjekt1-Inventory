@@ -7,6 +7,7 @@
     android:layout_margin="5dp"
     app:cardCornerRadius="12dp"
     app:cardElevation="3dp"
+    style="@style/cardBackgroundDetail"
     app:contentPadding="4dp"
     tools:context=".DetailsActivity">
 
@@ -25,11 +26,12 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <Button
+    <ImageButton
         android:id="@+id/itemDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:text="@string/deleteBtn" />
+        style="@style/cardBackgroundMain"
+        android:src="@drawable/ic_baseline_delete_24" />
 
 </androidx.cardview.widget.CardView>
