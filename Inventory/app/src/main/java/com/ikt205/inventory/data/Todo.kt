@@ -1,7 +1,5 @@
 package com.ikt205.inventory.data
 
-import com.ikt205.inventory.DetailRecyclerAdapter
-import com.ikt205.inventory.DetailsActivity
 import java.io.Serializable
 
 data class Todo(
@@ -20,7 +18,6 @@ data class Todo(
         print("\nTOTAL : \n")
         print(itemList.size)
         return itemList.size
-
     }
 
     fun getCompleted(): Int {

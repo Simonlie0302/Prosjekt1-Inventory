@@ -1,18 +1,14 @@
 package com.ikt205.inventory.data
 
 import android.content.Context
-import com.ikt205.inventory.DetailRecyclerAdapter
-import com.ikt205.inventory.DetailsActivity
+import com.ikt205.inventory.adapter.DetailRecyclerAdapter
 
 class ListDepositoryManager {
 
     private lateinit var listCollection: MutableList<Todo>
-    private lateinit var itemList: MutableList<Todo.Item>
-
 
     var onList: ((List<Todo>) -> Unit)? = null
     var onListUpdate: ((todo: Todo) -> Unit)? = null
-    var itemListe: ((List<Todo.Item>) -> Unit)? = null
 
 
     fun load(url: String, context: Context) {
@@ -37,7 +33,6 @@ class ListDepositoryManager {
                   Log.e("BookDepositoryManager", it.toString())
               })
           queue.add(request)*/
-
 
         listCollection = mutableListOf(
             Todo(

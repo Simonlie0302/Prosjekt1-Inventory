@@ -10,5 +10,4 @@
         android:layout_height="wrap_content"
         android:hint="@string/input_hint"
         android:singleLine="true" />
-
 </LinearLayout>

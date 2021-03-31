@@ -4,15 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:padding="4dp"
     style="@style/cardBackground"
+    android:padding="4dp"
     tools:context=".MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="25dp"
-        android:background="@color/teal_200"
+        style="@style/cardBackgroundMain"
         android:orientation="horizontal"
         android:outlineAmbientShadowColor="@color/black"
         android:padding="16dp">
@@ -45,7 +45,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="1dp"
             android:layout_marginEnd="-7dp"
-            android:background="@color/teal_200"
+            style="@style/cardBackgroundMain"
             android:src="@drawable/ic_baseline_delete_24" />
     </RelativeLayout>
 

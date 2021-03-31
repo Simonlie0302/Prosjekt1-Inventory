@@ -3,36 +3,24 @@ package com.ikt205.inventory
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import android.graphics.Typeface
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
-import android.util.TypedValue
-import android.view.Gravity
-import android.view.View
 import android.widget.EditText
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.view.isVisible
-import androidx.core.widget.TextViewCompat
-import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ikt205.inventory.adapter.ListRecyclerAdapter
 import com.ikt205.inventory.data.ListDepositoryManager
 import com.ikt205.inventory.data.Todo
 import com.ikt205.inventory.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.action_bar.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.listlayout.*
 
 private val TAG: String = "Inventory:MainActivity"
 
 class ListHolder {
-
     companion object {
         var PickedTodo: Todo? = null
     }
@@ -50,7 +38,6 @@ class MainActivity : AppCompatActivity() {
 
         binding.cardListing.layoutManager = LinearLayoutManager(this)
         binding.cardListing.adapter = ListRecyclerAdapter(emptyList<Todo>(), this::onListClicked)
-
 
         // set toolbar as support action bar
         setSupportActionBar(toolbar)
@@ -102,11 +89,6 @@ class MainActivity : AppCompatActivity() {
         //intent.putExtra("POS", position as Serializable)
         startActivity(intent)
     }
-
-    private fun deleteItem(position: Int) {
-        ListDepositoryManager.instance.deleteTodo(position)
-    }
-
 
     private fun chooseThemeDialog() {
 
@@ -172,6 +154,5 @@ class MyPreferences(context: Context?) {
 
     var darkMode = preferences.getInt(DARK_STATUS, 0)
         set(value) = preferences.edit().putInt(DARK_STATUS, value).apply()
-
 }
 
