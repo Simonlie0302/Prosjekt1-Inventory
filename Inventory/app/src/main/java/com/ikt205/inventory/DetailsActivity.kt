@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +14,7 @@ import com.ikt205.inventory.data.Todo
 import com.ikt205.inventory.databinding.ActivityDetailsBinding
 import com.ikt205.inventory.databinding.DetailslayoutBinding
 import kotlinx.android.synthetic.main.action_bar.*
+import kotlinx.android.synthetic.main.activity_details.*
 
 
 private val TAG: String = "Inventory:MainActivity"
@@ -29,24 +31,11 @@ class DetailsActivity() : AppCompatActivity() {
 
         todo = ListHolder.PickedTodo!!
         binding.detailsCardListing.layoutManager = LinearLayoutManager(this)
-        binding.detailsCardListing.adapter = DetailRecyclerAdapter(todo.itemList)
+        binding.detailsCardListing.adapter = DetailRecyclerAdapter(todo.itemList, todo.title, this::updateProgress)
 
         if (!this::bindingTest.isInitialized) {
             bindingTest = DetailslayoutBinding.inflate(layoutInflater)
         }
-
-//        if(ListHolder.PickedTodo != null){
-//            todo = ListHolder.PickedTodo
-//            Log.i("Details view", receivedBook.toString())
-//        } else{
-//
-//            setResult(RESULT_CANCELED, Intent(EXTRA_BOOK_INFO).apply {
-//                //leg til info vi vil sende tilbake til Main
-//            })
-//
-//            finish()
-//        }
-//        title=todo.title.toString()
 
         setSupportActionBar(toolbar)
         updateProgress()
@@ -80,10 +69,6 @@ class DetailsActivity() : AppCompatActivity() {
             builder.show()
         }
 
-        binding.refreshProgress.setOnClickListener {
-            updateProgress()
-        }
-
         binding.fabGoBack.setOnClickListener {
             ListHolder.PickedTodo = todo
             Log.e(TAG, "Pushed card : >${todo.toString()}")
@@ -96,12 +81,17 @@ class DetailsActivity() : AppCompatActivity() {
     }
 
     fun updateProgress(){
-        binding.pbProgressTest.max = todo.getSize()
-        binding.pbProgressTest.setProgress(todo.getCompleted(), true)
+        pbProgressTest.max = todo.getSize()
+        pbProgressTest.setProgress(todo.getCompleted(), true)
     }
 
     private fun addItem(todo: Todo, item: Todo.Item) {
-        ListDepositoryManager.instance.addItem(todo, item)
+        if (item.itemName.length>0) {
+            ListDepositoryManager.instance.addItem(todo, item)
+        }
+        else{
+            Toast.makeText(applicationContext, "Title can't be blank!", Toast.LENGTH_LONG).show()
+        }
     }
 
     companion object {

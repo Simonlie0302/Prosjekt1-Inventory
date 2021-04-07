@@ -5,11 +5,15 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
+import com.ikt205.inventory.data.ListDepositoryManager
 import com.ikt205.inventory.data.Todo
 import com.ikt205.inventory.databinding.DetailslayoutBinding
 
-class DetailRecyclerAdapter(private var itemList: MutableList<Todo.Item>) :
+class DetailRecyclerAdapter(private var itemList: MutableList<Todo.Item>,
+                            title: String,
+                            private val updateProgress: () -> Unit) :
     RecyclerView.Adapter<DetailRecyclerAdapter.Viewholder>() {
+    var title: String = title
 
     inner class Viewholder(val binding: DetailslayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -20,9 +24,13 @@ class DetailRecyclerAdapter(private var itemList: MutableList<Todo.Item>) :
             binding.detailsItemNameTv.text = item.itemName
             binding.itemCheckbox.isChecked = item.completed
             binding.itemCheckbox.setOnCheckedChangeListener { compoundButton: CompoundButton, b: Boolean ->
-                flip(position)
+                flip(item)
+                updateProgress()
             }
-            binding.itemDelete.setOnClickListener { deleteItem(position) }
+            binding.itemDelete.setOnClickListener {
+                deleteItem(position, item)
+                updateProgress()
+            }
         }
     }
 
@@ -47,14 +55,15 @@ class DetailRecyclerAdapter(private var itemList: MutableList<Todo.Item>) :
         notifyDataSetChanged()
     }
 
-    fun deleteItem(position: Int) {
+    fun deleteItem(position: Int, dItem: Todo.Item) {
         lateinit var dialog: AlertDialog
         itemList.removeAt(position)
-        updateCollection(itemList)
+        updateCollection(this.itemList)
+        ListDepositoryManager.instance.deleteItem(title, dItem.itemName)
     }
 
-    fun flip(position: Int) {
-        itemList[position].flipStatus()
+    fun flip(item: Todo.Item) {
+        ListDepositoryManager.instance.flipStatus(title, item, item.completed)
     }
 }
 

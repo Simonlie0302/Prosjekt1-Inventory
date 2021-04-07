@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -64,12 +65,12 @@ class MainActivity : AppCompatActivity() {
             val inputText = dialogLayout.findViewById<EditText>(R.id.inputEditText)
             builder.setView(dialogLayout)
             builder.setPositiveButton("OK") { dialogInterface, i ->
-                addTodo(
-                    Todo(
-                        inputText.text.toString(),
-                        mutableListOf(),
+                    addTodo(
+                        Todo(
+                            inputText.text.toString(),
+                            mutableListOf(),
+                        )
                     )
-                )
             }
             builder.show()
         }
@@ -78,7 +79,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addTodo(item: Todo) {
-        ListDepositoryManager.instance.addTodo(item)
+
+        if (item.title.length>0) {
+            ListDepositoryManager.instance.addTodo(item)
+        }
+        else{
+            Toast.makeText(applicationContext, "Title can't be blank!", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun onListClicked(todo: Todo): Unit {
