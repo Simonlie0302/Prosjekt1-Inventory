@@ -19,12 +19,12 @@ data class Todo(
     }
 
     fun getCompleted(): Int {
-        var n: Int = 0
+        var finished: Int = 0
         for (i in itemList) {
             print(i.completed)
             if (i.completed == true)
-                n += 1
+                finished += 1
         }
-        return n
+        return finished
     }
 }

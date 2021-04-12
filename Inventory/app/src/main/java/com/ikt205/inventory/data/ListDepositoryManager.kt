@@ -9,44 +9,38 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 
-private var URL: String = "https://inventory-b004f-default-rtdb.europe-west1.firebasedatabase.app/"
-
 class ListDepositoryManager {
 
-    private lateinit var listCollection: MutableList<Todo>
+    private var URL: String = "https://inventory-b004f-default-rtdb.europe-west1.firebasedatabase.app/"
+    private lateinit var listTodo: MutableList<Todo>
     val database = Firebase.database(URL)
-    val myPath = database.getReference("")
+    val myPath = database.getReference("") // The plan here was to add user functionality with a reference to each user
     var onList: ((List<Todo>) -> Unit)? = null
 
     fun load(url: String, context: Context) {
-
         URL = url
-        listCollection = mutableListOf()
-        readFromRealtimeDatabase()
-        onList?.invoke(listCollection)
-    }
-
-    fun addTodo(todo: Todo) {
-        myPath.child("Todo").child(todo.title).setValue(todo)
-        listCollection.add(todo)
-        onList?.invoke(listCollection)
-    }
-
-    fun reloadProgressBar() {
-        onList?.invoke(listCollection)
+        listTodo = mutableListOf()
+        readDatabase()
+        onList?.invoke(listTodo)
     }
 
     fun addItem(todo: Todo, itemList: Todo.Item) {
-        val currentItemIndex = listCollection.indexOf(todo)
-        listCollection[currentItemIndex].itemList.add(itemList)
+        val currentItemIndex = listTodo.indexOf(todo)
+        listTodo[currentItemIndex].itemList.add(itemList)
         myPath.child("Todo").child(todo.title).child("itemList")
             .child(itemList.itemName).setValue(itemList)
 
         DetailRecyclerAdapter(todo.itemList, todo.title, this::reloadProgressBar).updateCollection(
-            listCollection[currentItemIndex].itemList
+            listTodo[currentItemIndex].itemList
         )
-        onList?.invoke(listCollection)
-        updateStats()
+        onList?.invoke(listTodo)
+        setPathValue()
+    }
+
+    fun addTodo(todo: Todo) {
+        myPath.child("Todo").child(todo.title).setValue(todo)
+        listTodo.add(todo)
+        onList?.invoke(listTodo)
     }
 
     fun deleteItem(listKey: String, itemKey: String) {
@@ -54,17 +48,17 @@ class ListDepositoryManager {
         myPath.child("Todo").child(listKey).child("itemList")
             .child(itemKey).removeValue()
 
-        updateStats()
+        setPathValue()
     }
 
     fun deleteTodo(index: Int) {
         //Deleting entry from database
-        myPath.child("Todo").child(listCollection[index].title).removeValue()
+        myPath.child("Todo").child(listTodo[index].title).removeValue()
 
         //Deleting entry from local mutableList
-        listCollection.removeAt(index)
+        listTodo.removeAt(index)
 
-        updateStats()
+        setPathValue()
     }
 
     fun flipItemStatus(listKey: String, item: Todo.Item, status: Boolean) {
@@ -75,35 +69,42 @@ class ListDepositoryManager {
         myPath.child("Todo").child(listKey).child("itemList")
             .child(item.itemName).child("completed").setValue(!status)
 
-        updateStats()
+        setPathValue()
     }
 
-    fun updateStats() {
-        for (v in listCollection) {
+    fun reloadProgressBar() {
+        onList?.invoke(listTodo)
+    }
+
+    fun setPathValue() {
+        for (v in listTodo) {
             myPath.child("Todo").child(v.title).child("size").setValue(v.getSize())
             myPath.child("Todo").child(v.title).child("completed").setValue(v.getCompleted())
         }
     }
 
-    fun readFromRealtimeDatabase() {
-        //Complex interface between app and firebase databse - Reads/updates the value from from database into local mutableLIst at startup
+    fun readDatabase() {
+        //Complex interface between app and firebase database - Reads/updates the value from from database into local mutableLIst at startup
         myPath.orderByKey().addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val dBitems = snapshot.children.iterator()
-                if (dBitems.hasNext()) {
-                    val toDoListindex = dBitems.next()
-                    val itemsIterator = toDoListindex.children.iterator()
+                val snapshotIterator = snapshot.children.iterator()
+
+                if (snapshotIterator.hasNext()) {
+                    val itemIndex = snapshotIterator.next()
+                    val itemsIterator = itemIndex.children.iterator()
+
                     while (itemsIterator.hasNext()) {
                         //get current item
-                        val currentItem = itemsIterator.next()
-                        val itemMap: HashMap<String, Any>
-                        val tmp = mutableListOf<Todo.Item>()
-                        if (currentItem.child("itemList").getValue() != null) {
-                            itemMap =
-                                currentItem.child("itemList").getValue() as HashMap<String, Any>
-                            for ((k, v) in itemMap) {
+                        val itemHashMap: HashMap<String, Any>
+                        val temporaryList = mutableListOf<Todo.Item>()
+                        val databaseItem = itemsIterator.next()
+
+                        if (databaseItem.child("itemList").getValue() != null) {
+                            itemHashMap = databaseItem.child("itemList").getValue() as HashMap<String, Any>
+
+                            for ((k, v) in itemHashMap) {
                                 v as HashMap<String, Boolean>
-                                tmp.add(
+                                temporaryList.add(
                                     Todo.Item(
                                         v.get("itemName").toString(),
                                         v.get("completed")!!
@@ -111,11 +112,14 @@ class ListDepositoryManager {
                                 )
                             }
                         }
-                        listCollection!!.add(Todo(currentItem.key.toString(), tmp))
+
+                        listTodo!!.add(Todo(databaseItem.key.toString(), temporaryList))
                     }
                 }
-                onList?.invoke(listCollection)
+
+                onList?.invoke(listTodo)
             }
+
             override fun onCancelled(error: DatabaseError) {
                 Log.w("DatabaseError", error.details)
             }
