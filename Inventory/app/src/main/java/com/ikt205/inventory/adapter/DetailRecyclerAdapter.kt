@@ -3,7 +3,6 @@ package com.ikt205.inventory.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CompoundButton
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.ikt205.inventory.data.ListDepositoryManager
 import com.ikt205.inventory.data.Todo

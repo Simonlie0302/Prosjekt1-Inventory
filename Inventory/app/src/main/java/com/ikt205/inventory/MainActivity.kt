@@ -79,7 +79,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addTodo(item: Todo) {
-
         if (item.title.length > 0) {
             ListDepositoryManager.instance.addTodo(item)
         } else {
