@@ -9,7 +9,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 
-
 private var URL: String = "https://inventory-b004f-default-rtdb.europe-west1.firebasedatabase.app/"
 
 class ListDepositoryManager {
@@ -18,8 +17,6 @@ class ListDepositoryManager {
     val database = Firebase.database(URL)
     val myPath = database.getReference("")
     var onList: ((List<Todo>) -> Unit)? = null
-    var onListUpdate: ((todo: Todo) -> Unit)? = null
-
 
     fun load(url: String, context: Context) {
 
@@ -27,11 +24,6 @@ class ListDepositoryManager {
         listCollection = mutableListOf()
         readFromRealtimeDatabase()
         onList?.invoke(listCollection)
-    }
-
-    fun updateItem(todo: Todo) {
-        // finn bok i listen og erstat med den nye boken.
-        onListUpdate?.invoke(todo)
     }
 
     fun addTodo(todo: Todo) {
@@ -50,7 +42,9 @@ class ListDepositoryManager {
         myPath.child("Todo").child(todo.title).child("itemList")
             .child(itemList.itemName).setValue(itemList)
 
-        DetailRecyclerAdapter(todo.itemList, todo.title, this::reloadProgressBar).updateCollection(listCollection[currentItemIndex].itemList)
+        DetailRecyclerAdapter(todo.itemList, todo.title, this::reloadProgressBar).updateCollection(
+            listCollection[currentItemIndex].itemList
+        )
         onList?.invoke(listCollection)
         updateStats()
     }
@@ -73,7 +67,7 @@ class ListDepositoryManager {
         updateStats()
     }
 
-    fun flipStatus(listKey: String, item: Todo.Item, status: Boolean) {
+    fun flipItemStatus(listKey: String, item: Todo.Item, status: Boolean) {
         //Flipping status locally in mutableList
         item.flipStatus()
 
@@ -84,7 +78,7 @@ class ListDepositoryManager {
         updateStats()
     }
 
-    fun updateStats(){
+    fun updateStats() {
         for (v in listCollection) {
             myPath.child("Todo").child(v.title).child("size").setValue(v.getSize())
             myPath.child("Todo").child(v.title).child("completed").setValue(v.getCompleted())

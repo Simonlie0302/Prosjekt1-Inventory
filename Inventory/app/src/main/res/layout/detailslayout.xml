@@ -2,12 +2,12 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/cardBackgroundDetail"
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:layout_margin="5dp"
     app:cardCornerRadius="12dp"
     app:cardElevation="3dp"
-    style="@style/cardBackgroundDetail"
     app:contentPadding="4dp"
     tools:context=".DetailsActivity">
 
@@ -17,7 +17,7 @@
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/detailsItemNameTv"
+        android:id="@+id/detailsItemTitle"
         android:layout_width="191dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -27,11 +27,11 @@
         android:textStyle="bold" />
 
     <ImageButton
-        android:id="@+id/itemDelete"
+        android:id="@+id/itemDeleteBtn"
+        style="@style/cardBackgroundMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        style="@style/cardBackgroundMain"
         android:src="@drawable/ic_baseline_delete_24" />
 
 </androidx.cardview.widget.CardView>

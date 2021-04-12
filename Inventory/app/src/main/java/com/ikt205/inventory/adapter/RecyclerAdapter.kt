@@ -2,7 +2,6 @@ package com.ikt205.inventory.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.ikt205.inventory.data.ListDepositoryManager
 import com.ikt205.inventory.data.Todo
@@ -17,11 +16,11 @@ class ListRecyclerAdapter(
         fun bind(todo: Todo) {
             val position: Int = getAdapterPosition()
 
-            binding.tvTittel.text = todo.title
-            binding.pbProgress.max = todo.getSize()
-            binding.pbProgress.setProgress(todo.getCompleted(), true)
-            binding.pbProgress.max = todo.getSize()
-            binding.deleteBtn.setOnClickListener { deleteItem(position) }
+            binding.todoTitle.text = todo.title
+            binding.todoProgress.max = todo.getSize()
+            binding.todoProgress.setProgress(todo.getCompleted(), true)
+            binding.todoProgress.max = todo.getSize()
+            binding.deleteTodoBtn.setOnClickListener { deleteItem(position) }
         }
     }
 
@@ -52,7 +51,6 @@ class ListRecyclerAdapter(
     }
 
     fun deleteItem(position: Int) {
-        lateinit var dialog: AlertDialog
         ListDepositoryManager.instance.deleteTodo(position)
         updateCollection(todo)
     }

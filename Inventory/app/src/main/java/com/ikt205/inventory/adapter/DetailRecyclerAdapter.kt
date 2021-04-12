@@ -9,9 +9,11 @@ import com.ikt205.inventory.data.ListDepositoryManager
 import com.ikt205.inventory.data.Todo
 import com.ikt205.inventory.databinding.DetailslayoutBinding
 
-class DetailRecyclerAdapter(private var itemList: MutableList<Todo.Item>,
-                            title: String,
-                            private val updateProgress: () -> Unit) :
+class DetailRecyclerAdapter(
+    private var itemList: MutableList<Todo.Item>,
+    title: String,
+    private val updateProgress: () -> Unit
+) :
     RecyclerView.Adapter<DetailRecyclerAdapter.Viewholder>() {
     var title: String = title
 
@@ -21,13 +23,13 @@ class DetailRecyclerAdapter(private var itemList: MutableList<Todo.Item>,
         fun bind(item: Todo.Item) {
             val position: Int = getAdapterPosition()
 
-            binding.detailsItemNameTv.text = item.itemName
+            binding.detailsItemTitle.text = item.itemName
             binding.itemCheckbox.isChecked = item.completed
             binding.itemCheckbox.setOnCheckedChangeListener { compoundButton: CompoundButton, b: Boolean ->
                 flip(item)
                 updateProgress()
             }
-            binding.itemDelete.setOnClickListener {
+            binding.itemDeleteBtn.setOnClickListener {
                 deleteItem(position, item)
                 updateProgress()
             }
@@ -56,14 +58,13 @@ class DetailRecyclerAdapter(private var itemList: MutableList<Todo.Item>,
     }
 
     fun deleteItem(position: Int, dItem: Todo.Item) {
-        lateinit var dialog: AlertDialog
         itemList.removeAt(position)
         updateCollection(this.itemList)
         ListDepositoryManager.instance.deleteItem(title, dItem.itemName)
     }
 
     fun flip(item: Todo.Item) {
-        ListDepositoryManager.instance.flipStatus(title, item, item.completed)
+        ListDepositoryManager.instance.flipItemStatus(title, item, item.completed)
     }
 }
 

@@ -46,7 +46,7 @@
         android:src="@drawable/ic_baseline_nights_stay_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAdd"
+        android:id="@+id/fabAddTodo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
@@ -55,7 +55,5 @@
         app:srcCompat="@android:drawable/ic_menu_add"
 
         />
-
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
