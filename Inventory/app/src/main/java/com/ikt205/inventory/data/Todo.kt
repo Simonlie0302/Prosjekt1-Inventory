@@ -15,8 +15,6 @@ data class Todo(
     }
 
     fun getSize(): Int {
-        print("\nTOTAL : \n")
-        print(itemList.size)
         return itemList.size
     }
 
@@ -27,8 +25,6 @@ data class Todo(
             if (i.completed == true)
                 n += 1
         }
-        print("\nCOMPLETED : \n")
-        print(n)
         return n
     }
 }

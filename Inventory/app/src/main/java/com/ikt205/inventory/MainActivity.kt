@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         ListDepositoryManager.instance.load("s", this)
 
         //Floating action button
-        binding.fabAdd.setOnClickListener {
+        binding.fabAddTodo.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             val inflater = layoutInflater
             builder.setTitle("Enter name of list")
@@ -65,12 +65,12 @@ class MainActivity : AppCompatActivity() {
             val inputText = dialogLayout.findViewById<EditText>(R.id.inputEditText)
             builder.setView(dialogLayout)
             builder.setPositiveButton("OK") { dialogInterface, i ->
-                    addTodo(
-                        Todo(
-                            inputText.text.toString(),
-                            mutableListOf(),
-                        )
+                addTodo(
+                    Todo(
+                        inputText.text.toString(),
+                        mutableListOf(),
                     )
+                )
             }
             builder.show()
         }
@@ -80,10 +80,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun addTodo(item: Todo) {
 
-        if (item.title.length>0) {
+        if (item.title.length > 0) {
             ListDepositoryManager.instance.addTodo(item)
-        }
-        else{
+        } else {
             Toast.makeText(applicationContext, "Title can't be blank!", Toast.LENGTH_LONG).show()
         }
     }

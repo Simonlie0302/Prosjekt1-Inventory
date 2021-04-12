@@ -31,7 +31,8 @@ class DetailsActivity() : AppCompatActivity() {
 
         todo = ListHolder.PickedTodo!!
         binding.detailsCardListing.layoutManager = LinearLayoutManager(this)
-        binding.detailsCardListing.adapter = DetailRecyclerAdapter(todo.itemList, todo.title, this::updateProgress)
+        binding.detailsCardListing.adapter =
+            DetailRecyclerAdapter(todo.itemList, todo.title, this::updateProgress)
 
         if (!this::bindingTest.isInitialized) {
             bindingTest = DetailslayoutBinding.inflate(layoutInflater)
@@ -80,21 +81,16 @@ class DetailsActivity() : AppCompatActivity() {
         }
     }
 
-    fun updateProgress(){
+    fun updateProgress() {
         pbProgressTest.max = todo.getSize()
         pbProgressTest.setProgress(todo.getCompleted(), true)
     }
 
     private fun addItem(todo: Todo, item: Todo.Item) {
-        if (item.itemName.length>0) {
+        if (item.itemName.length > 0) {
             ListDepositoryManager.instance.addItem(todo, item)
-        }
-        else{
+        } else {
             Toast.makeText(applicationContext, "Title can't be blank!", Toast.LENGTH_LONG).show()
         }
-    }
-
-    companion object {
-        val instance = DetailsActivity()
     }
 }

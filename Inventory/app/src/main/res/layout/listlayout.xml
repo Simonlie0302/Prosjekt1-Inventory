@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recyclerViewMain"
+    style="@style/cardBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:id="@+id/recyclerViewMain"
-    style="@style/cardBackground"
     android:padding="4dp"
     tools:context=".MainActivity">
 
     <RelativeLayout
+        style="@style/cardBackgroundMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="25dp"
-        style="@style/cardBackgroundMain"
         android:orientation="horizontal"
         android:outlineAmbientShadowColor="@color/black"
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/tvTittel"
+            android:id="@+id/todoTitle"
             android:layout_width="269dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -28,7 +28,7 @@
             android:textStyle="bold" />
 
         <ProgressBar
-            android:id="@+id/pbProgress"
+            android:id="@+id/todoProgress"
             style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
             android:layout_width="145dp"
             android:layout_height="34dp"
@@ -39,14 +39,14 @@
             android:theme="@style/progressBarOrange" />
 
         <ImageButton
-            android:id="@+id/deleteBtn"
+            android:id="@+id/deleteTodoBtn"
+            style="@style/cardBackgroundMain"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="1dp"
             android:layout_marginEnd="-7dp"
-            style="@style/cardBackgroundMain"
             android:src="@drawable/ic_baseline_delete_24" />
     </RelativeLayout>
 

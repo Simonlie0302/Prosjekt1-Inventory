@@ -24,16 +24,16 @@
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/toolbarTitle"
                 style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textColor="@color/white"
+                android:textSize="30sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
-                android:textColor="@color/white"
-                android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Center aligned title text" />
+                tools:text="Test center aligned text" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/toolbarSubTitle"
@@ -48,9 +48,7 @@
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbarTitle"
-                tools:text="Center aligned sub title" />
-
-
+                tools:text="Test center aligned sub text" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.appcompat.widget.Toolbar>
