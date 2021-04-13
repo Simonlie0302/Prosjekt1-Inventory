@@ -47,6 +47,9 @@ My app works fluently and has distinct colors. Decided to go with bright colors 
   
 <h3 align="Left">Why I decided to use Firebase RealtimeDatabase</h3>
 After reasearching the topic of realtime vs firestore i decided to use realtime database as my backend. The reasoning being that i wanted to try both and because i have experience with firestore I wanted to try realtime. Every article I read pointed me toward the functionality of realtime database and because the project description only mentioned firebase backend and not firestore, I decided to try it out.
+
+<h3 align="Left">Branches</h3>
+Every branch is named with function and then the specific task (functionality/task). I decided to not delete any branches after merging on the basis that it is easier to view the progress of each branch without having to go into history. 
 <h3 align="Left">Unit testing</h3>
 I have used unit testing to create and transform data by checking for the expected format and further checked for correct data in different cases by asserting into my data classes. 
 
