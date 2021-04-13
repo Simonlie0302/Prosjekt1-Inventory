@@ -54,3 +54,8 @@ Every branch is named with function and then the specific task (functionality/ta
 <h3 align="Left">Unit testing</h3>
 I have used unit testing to create and transform data by checking for the expected format and further checked for correct data in different cases by asserting into my data classes. 
 
+<h5 align="Left">Did not find any way to view the database contents by using the APK link so i´m adding a picture of my simple realtime database layout.</h5>
+
+![image](https://user-images.githubusercontent.com/73124270/114563381-a7799c80-9c6f-11eb-863b-01830fcb4511.png)
+
+
