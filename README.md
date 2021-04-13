@@ -2,7 +2,8 @@
 
 <h1 align="Center">App name: Inventory</h1>
 
-APK link: https://appdistribution.firebase.dev/i/b28a381845b885c0
+[APK link](https://appdistribution.firebase.dev/i/b28a381845b885c0)
+
 
 My app works fluently and has distinct colors. Decided to go with bright colors to make the user remember to actually use the app. The functionality is working well and every feature is included. The progress bar changes dynamically and everything is stored in firebase, both todos, items below todos, how many have been completed and how many items there in each todo. Chose the name inventory because I thought this should be more than just a todo app, but it should be used for absolutely everything one needs to keep in mind not only todos. Recommended movies or games from friends etc, things you have to remember but will forget right after being told.
 
