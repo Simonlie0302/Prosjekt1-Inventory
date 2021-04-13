@@ -2,6 +2,8 @@
 
 <h1 align="Center">App name: Inventory</h1>
 
+APK link: https://appdistribution.firebase.dev/i/b28a381845b885c0
+
 My app works fluently and has distinct colors. Decided to go with bright colors to make the user remember to actually use the app. The functionality is working well and every feature is included. The progress bar changes dynamically and everything is stored in firebase, both todos, items below todos, how many have been completed and how many items there in each todo. Chose the name inventory because I thought this should be more than just a todo app, but it should be used for absolutely everything one needs to keep in mind not only todos. Recommended movies or games from friends etc, things you have to remember but will forget right after being told.
 
 <h3 align="Left">Features</h3>
@@ -47,6 +49,4 @@ My app works fluently and has distinct colors. Decided to go with bright colors 
 After reasearching the topic of realtime vs firestore i decided to use realtime database as my backend. The reasoning being that i wanted to try both and because i have experience with firestore I wanted to try realtime. Every article I read pointed me toward the functionality of realtime database and because the project description only mentioned firebase backend and not firestore, I decided to try it out.
 <h3 align="Left">Unit testing</h3>
 I have used unit testing to create and transform data by checking for the expected format and further checked for correct data in different cases by asserting into my data classes. 
-
-APK link: https://appdistribution.firebase.dev/i/b28a381845b885c0
 
