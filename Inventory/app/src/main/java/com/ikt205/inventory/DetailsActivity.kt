@@ -12,7 +12,7 @@ import com.ikt205.inventory.adapter.DetailRecyclerAdapter
 import com.ikt205.inventory.data.ListDepositoryManager
 import com.ikt205.inventory.data.Todo
 import com.ikt205.inventory.databinding.ActivityDetailsBinding
-import com.ikt205.inventory.databinding.DetailslayoutBinding
+import com.ikt205.inventory.databinding.DetailsRecycledLayoutBinding
 import kotlinx.android.synthetic.main.action_bar.*
 import kotlinx.android.synthetic.main.activity_details.*
 
@@ -21,7 +21,7 @@ private val TAG: String = "Inventory:MainActivity"
 
 class DetailsActivity() : AppCompatActivity() {
     private lateinit var binding: ActivityDetailsBinding
-    private lateinit var bindingTest: DetailslayoutBinding
+    private lateinit var bindingTest: DetailsRecycledLayoutBinding
     private lateinit var todo: Todo
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,17 +31,16 @@ class DetailsActivity() : AppCompatActivity() {
 
         todo = ListHolder.PickedTodo!!
         binding.detailsCardListing.layoutManager = LinearLayoutManager(this)
-        binding.detailsCardListing.adapter =
-            DetailRecyclerAdapter(todo.itemList, todo.title, this::updateProgress)
+        binding.detailsCardListing.adapter = DetailRecyclerAdapter(todo.itemList, todo.title, this::updateProgress)
 
         if (!this::bindingTest.isInitialized) {
-            bindingTest = DetailslayoutBinding.inflate(layoutInflater)
+            bindingTest = DetailsRecycledLayoutBinding.inflate(layoutInflater)
         }
 
         setSupportActionBar(toolbar)
         updateProgress()
 
-        // show center aligned title and sub title
+        // Show center aligned title and sub title
         supportActionBar?.apply {
             toolbarTitle.text = todo.title.toString()
             toolbarSubTitle.text = ""
@@ -58,6 +57,8 @@ class DetailsActivity() : AppCompatActivity() {
             val inputText = dialogLayout.findViewById<EditText>(R.id.inputEditText)
             builder.setView(dialogLayout)
             updateProgress()
+
+            // Adds the input text from dialogInterface and sets completed to a default bool
             builder.setPositiveButton("OK") { dialogInterface, i ->
                 addItem(
                     todo,
@@ -73,10 +74,9 @@ class DetailsActivity() : AppCompatActivity() {
         binding.fabGoBack.setOnClickListener {
             ListHolder.PickedTodo = todo
             Log.e(TAG, "Pushed card : >${todo.toString()}")
-            // bindingTest.updateCollection(newList)
             ListDepositoryManager.instance.reloadProgressBar()
 
-            // Skal jeg bruke startActivity(intent) eller finishAndRemoveTask() her
+            // Finishes and removes the task
             finishAndRemoveTask()
         }
     }

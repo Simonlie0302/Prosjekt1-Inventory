@@ -20,7 +20,7 @@ class ListDepositoryManager {
     fun load(url: String, context: Context) {
         URL = url
         listTodo = mutableListOf()
-        readDatabase()
+        initialReadFromDatabase()
         onList?.invoke(listTodo)
     }
 
@@ -44,7 +44,7 @@ class ListDepositoryManager {
     }
 
     fun deleteItem(listKey: String, itemKey: String) {
-        //Deleting entry from database. Deletion from local mutableList is done in adapter
+        //Deleting entry from database not in the local mutable list
         myPath.child("Todo").child(listKey).child("itemList")
             .child(itemKey).removeValue()
 
@@ -78,21 +78,23 @@ class ListDepositoryManager {
 
     fun setPathValue() {
         for (v in listTodo) {
+            // Updating the path starting with Todo/title/(size or completed)
             myPath.child("Todo").child(v.title).child("size").setValue(v.getSize())
             myPath.child("Todo").child(v.title).child("completed").setValue(v.getCompleted())
         }
     }
 
-    fun readDatabase() {
-        //Complex interface between app and firebase database - Reads/updates the value from from database into local mutableLIst at startup
+    fun initialReadFromDatabase() {
+        //Reads/updates the value from from database into local mutableLIst at startup
         myPath.orderByKey().addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val snapshotIterator = snapshot.children.iterator()
-
+                // Returns true if the if the iteration has more elements
                 if (snapshotIterator.hasNext()) {
                     val itemIndex = snapshotIterator.next()
                     val itemsIterator = itemIndex.children.iterator()
 
+                    // Reads from the database and adds the data to a temporary list
                     while (itemsIterator.hasNext()) {
                         //get current item
                         val itemHashMap: HashMap<String, Any>
@@ -112,14 +114,14 @@ class ListDepositoryManager {
                                 )
                             }
                         }
-
+                        // Adds the temporary list to the main list
                         listTodo!!.add(Todo(databaseItem.key.toString(), temporaryList))
                     }
                 }
 
                 onList?.invoke(listTodo)
             }
-
+            // Returns database error on transaction cancellation.
             override fun onCancelled(error: DatabaseError) {
                 Log.w("DatabaseError", error.details)
             }

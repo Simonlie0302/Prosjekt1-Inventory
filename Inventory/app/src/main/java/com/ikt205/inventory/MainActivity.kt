@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity() {
             this.elevation = 15F
         }
 
+        // Using the listdepo manager to bind the cardListing to the adapter as ListRecyclerAdapter
         ListDepositoryManager.instance.onList = {
             (binding.cardListing.adapter as ListRecyclerAdapter).updateCollection(it)
         }
@@ -64,6 +65,9 @@ class MainActivity : AppCompatActivity() {
             val dialogLayout = inflater.inflate(R.layout.alert_dialog_input, null)
             val inputText = dialogLayout.findViewById<EditText>(R.id.inputEditText)
             builder.setView(dialogLayout)
+
+            // Using the dialogInterface to retrieve the input text and further call to the
+            // function addTodo with the properties inputText and mutableListof
             builder.setPositiveButton("OK") { dialogInterface, i ->
                 addTodo(
                     Todo(
@@ -79,6 +83,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addTodo(item: Todo) {
+
+        // Checks if the title is empty, if it is don´t call addTodo
+        // Had some bugs with tmp and isEmpty() so decided to use .length > 0
         if (item.title.length > 0) {
             ListDepositoryManager.instance.addTodo(item)
         } else {
@@ -89,9 +96,9 @@ class MainActivity : AppCompatActivity() {
     private fun onListClicked(todo: Todo): Unit {
         ListHolder.PickedTodo = todo
         Log.e(TAG, "Pushed card : >${todo.toString()}")
-        //println("Content : %s", )
         val intent = Intent(this, DetailsActivity::class.java)
-        //intent.putExtra("POS", position as Serializable)
+
+        // Starting an activity with the intent of the currently clicked todo
         startActivity(intent)
     }
 
@@ -102,8 +109,10 @@ class MainActivity : AppCompatActivity() {
         val styles = arrayOf("Light", "Dark", "System default")
         val checkedItem = MyPreferences(this).darkMode
 
+        // Dialog pop up with 3 different choices
         builder.setSingleChoiceItems(styles, checkedItem) { dialog, which ->
 
+            // Using the built in android studio .xml night theme, with manually set colors
             when (which) {
                 0 -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -155,6 +164,10 @@ class MyPreferences(context: Context?) {
         private const val DARK_STATUS = "io.github.manuelernesto.DARK_STATUS"
     }
 
+    /*
+    Tried to use the default shared preference to track the phone default value, could not test
+    this because i did not find any dark mode option on my emulator. I did install the gradle import but its still acting weird.
+    */
     private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
 
     var darkMode = preferences.getInt(DARK_STATUS, 0)

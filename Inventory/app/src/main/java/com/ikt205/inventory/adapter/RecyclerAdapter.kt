@@ -5,14 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ikt205.inventory.data.ListDepositoryManager
 import com.ikt205.inventory.data.Todo
-import com.ikt205.inventory.databinding.ListlayoutBinding
+import com.ikt205.inventory.databinding.MainRecycledLayoutBinding
 
 class ListRecyclerAdapter(
     private var todo: List<Todo>,
     private val onListClicked: (todo: Todo) -> Unit
 ) : RecyclerView.Adapter<ListRecyclerAdapter.Viewholder>() {
 
-    inner class Viewholder(val binding: ListlayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class Viewholder(val binding: MainRecycledLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(todo: Todo) {
             val position: Int = getAdapterPosition()
 
@@ -37,7 +37,7 @@ class ListRecyclerAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Viewholder {
         return Viewholder(
-            ListlayoutBinding.inflate(
+            MainRecycledLayoutBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
