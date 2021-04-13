@@ -6,7 +6,7 @@ import android.widget.CompoundButton
 import androidx.recyclerview.widget.RecyclerView
 import com.ikt205.inventory.data.ListDepositoryManager
 import com.ikt205.inventory.data.Todo
-import com.ikt205.inventory.databinding.DetailslayoutBinding
+import com.ikt205.inventory.databinding.DetailsRecycledLayoutBinding
 
 class DetailRecyclerAdapter(
     private var itemList: MutableList<Todo.Item>,
@@ -16,12 +16,13 @@ class DetailRecyclerAdapter(
     RecyclerView.Adapter<DetailRecyclerAdapter.Viewholder>() {
     var title: String = title
 
-    inner class Viewholder(val binding: DetailslayoutBinding) :
+    inner class Viewholder(val binding: DetailsRecycledLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Todo.Item) {
             val position: Int = getAdapterPosition()
 
+            // Binds xml buttons with the data class item.
             binding.detailsItemTitle.text = item.itemName
             binding.itemCheckbox.isChecked = item.completed
             binding.itemCheckbox.setOnCheckedChangeListener { compoundButton: CompoundButton, b: Boolean ->
@@ -43,7 +44,7 @@ class DetailRecyclerAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Viewholder {
         return Viewholder(
-            DetailslayoutBinding.inflate(
+            DetailsRecycledLayoutBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -56,10 +57,11 @@ class DetailRecyclerAdapter(
         notifyDataSetChanged()
     }
 
-    fun deleteItem(position: Int, dItem: Todo.Item) {
+    fun deleteItem(position: Int, specificItem: Todo.Item) {
         itemList.removeAt(position)
         updateCollection(this.itemList)
-        ListDepositoryManager.instance.deleteItem(title, dItem.itemName)
+        // Using the list depository manager to delete the instance with matching title and the specific item name
+        ListDepositoryManager.instance.deleteItem(title, specificItem.itemName)
     }
 
     fun flip(item: Todo.Item) {
