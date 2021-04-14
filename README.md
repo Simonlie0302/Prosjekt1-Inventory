@@ -44,6 +44,7 @@ My app works fluently and has distinct colors. Decided to go with bright colors 
   * Each item store a completed bool value and title name
   * Deleting an item does not delete the todo, only the item clicked on:))(Bug I had for a very long time)
   * Stores the value of the checkbox automaticly when changed
+* Will also read from the database at launch
   
   
 <h3 align="Left">Why I decided to use Firebase RealtimeDatabase</h3>
